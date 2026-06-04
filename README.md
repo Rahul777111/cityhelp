@@ -1,5 +1,7 @@
 # CityHelp — Report. Track. Resolve.
 
+**Live demo: [cityhelp-sage.vercel.app](https://cityhelp-sage.vercel.app)**
+
 A full-stack civic platform for a city (modeled on Hyderabad). Residents report issues, rally support with upvotes, track resolutions on a live dashboard and map, and find every city service in one place.
 
 ![Tech](https://img.shields.io/badge/Next.js-16-0d9488) ![Tech](https://img.shields.io/badge/API%20Routes-server-blue) ![Tech](https://img.shields.io/badge/Recharts-charts-black)
