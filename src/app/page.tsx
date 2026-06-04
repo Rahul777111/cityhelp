@@ -203,7 +203,7 @@ export default function Home() {
       </section>
 
       {/* tabs */}
-      <div className="sticky top-16 z-30 border-b border-[var(--border)] bg-white/90 backdrop-blur">
+      <div className="sticky top-16 z-30 border-b border-[var(--border)] bg-[var(--surface)]/90 backdrop-blur">
         <div className="mx-auto flex max-w-[1180px] gap-1 px-5">
           {TABS.map((t) => (
             <button
