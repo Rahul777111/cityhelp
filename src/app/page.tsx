@@ -26,6 +26,8 @@ import {
 import dynamic from "next/dynamic";
 import Navbar from "./components/Navbar";
 import ReportForm from "./components/ReportForm";
+import { AreasStrip, ImpactWall } from "./components/DiscoverSections";
+import LandingHero from "./components/LandingHero";
 import { useReportsRealtime } from "@/lib/useRealtime";
 import { CategoryIcon, StatusBadge, timeAgo, STATUS_META } from "./components/shared";
 import { CATEGORIES, AREAS, SERVICES, type Report, type Status } from "@/lib/data";
@@ -117,12 +119,22 @@ export default function Home() {
     <div className="min-h-[100dvh]">
       <Navbar onReport={() => setShowForm(true)} />
 
-      {/* hero / dashboard */}
-      <section className="border-b border-[var(--border)] bg-gradient-to-b from-[var(--brand-soft)]/40 to-transparent">
+      <LandingHero
+        onReport={() => setShowForm(true)}
+        onExplore={() => {
+          setTab("Map");
+          document
+            .getElementById("dashboard")
+            ?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }}
+      />
+
+      {/* dashboard */}
+      <section id="dashboard" className="scroll-mt-20 border-b border-[var(--border)] bg-gradient-to-b from-[var(--brand-soft)]/40 to-transparent">
         <div className="mx-auto max-w-[1180px] px-5 py-8">
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
             Your city, working better together.
-          </h1>
+          </h2>
           <p className="mt-1.5 max-w-xl text-sm text-[var(--text-dim)]">
             Report issues, rally support with upvotes, track resolutions, and find every city
             service in one place.
@@ -300,6 +312,9 @@ export default function Home() {
           )}
         </AnimatePresence>
       </main>
+
+      <AreasStrip />
+      <ImpactWall />
 
       <AnimatePresence>
         {showForm && (
