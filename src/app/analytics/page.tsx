@@ -85,7 +85,7 @@ export default function AnalyticsPage() {
             </div>
 
             {/* trend */}
-            <div className="mt-5 rounded-2xl border border-[var(--border)] bg-white p-5">
+            <div className="mt-5 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
               <h3 className="mb-4 text-sm font-semibold uppercase tracking-wide text-[var(--text-dim)]">
                 Reports over the last 7 days
               </h3>
@@ -110,7 +110,7 @@ export default function AnalyticsPage() {
 
             <div className="mt-5 grid gap-5 lg:grid-cols-2">
               {/* category */}
-              <div className="rounded-2xl border border-[var(--border)] bg-white p-5">
+              <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
                 <h3 className="mb-4 text-sm font-semibold uppercase tracking-wide text-[var(--text-dim)]">
                   Issues by category
                 </h3>
@@ -127,7 +127,7 @@ export default function AnalyticsPage() {
               </div>
 
               {/* area hotspots */}
-              <div className="rounded-2xl border border-[var(--border)] bg-white p-5">
+              <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
                 <h3 className="mb-4 text-sm font-semibold uppercase tracking-wide text-[var(--text-dim)]">
                   Hotspots by area
                 </h3>
@@ -150,7 +150,7 @@ export default function AnalyticsPage() {
             </div>
 
             {/* departments */}
-            <div className="mt-5 rounded-2xl border border-[var(--border)] bg-white p-5">
+            <div className="mt-5 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
               <h3 className="mb-4 text-sm font-semibold uppercase tracking-wide text-[var(--text-dim)]">
                 Workload by department
               </h3>
@@ -172,7 +172,7 @@ export default function AnalyticsPage() {
 
 function Kpi({ icon: Icon, label, value, color }: { icon: React.ElementType; label: string; value: string | number; color: string }) {
   return (
-    <div className="rounded-2xl border border-[var(--border)] bg-white p-4">
+    <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
       <span className="grid h-9 w-9 place-items-center rounded-lg" style={{ background: `${color}1a`, color }}>
         <Icon size={18} weight="fill" />
       </span>

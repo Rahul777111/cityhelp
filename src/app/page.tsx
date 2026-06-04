@@ -137,7 +137,7 @@ export default function Home() {
               <StatCard icon={ArrowFatUp} label="Resolved rate" value={`${stats?.resolvedRate ?? 0}%`} color="var(--open)" />
             </div>
 
-            <div className="rounded-2xl border border-[var(--border)] bg-white p-4">
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
               <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--text-dim)]">
                 By status
               </h3>
@@ -164,7 +164,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-[var(--border)] bg-white p-4">
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
               <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--text-dim)]">
                 By category
               </h3>
@@ -211,7 +211,7 @@ export default function Home() {
             <motion.div key="issues" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
               {/* filters */}
               <div className="mb-5 flex flex-wrap items-center gap-2">
-                <div className="flex flex-1 items-center gap-2 rounded-xl border border-[var(--border)] bg-white px-3 py-2 focus-within:border-[var(--brand)]">
+                <div className="flex flex-1 items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 focus-within:border-[var(--brand)]">
                   <MagnifyingGlass size={16} className="text-[var(--text-dim)]" />
                   <input
                     value={q}
@@ -278,7 +278,7 @@ export default function Home() {
                       <a
                         key={s.name}
                         href={`tel:${s.number}`}
-                        className="group flex items-center gap-3 rounded-2xl border border-[var(--border)] bg-white p-4 transition hover:border-[var(--brand)] hover:shadow-sm"
+                        className="group flex items-center gap-3 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 transition hover:border-[var(--brand)] hover:shadow-sm"
                       >
                         <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[var(--brand-soft)] text-[var(--brand-dark)]">
                           <Phone size={20} weight="fill" />
@@ -313,7 +313,7 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      <footer className="border-t border-[var(--border)] bg-white">
+      <footer className="border-t border-[var(--border)] bg-[var(--surface)]">
         <div className="mx-auto flex max-w-[1180px] flex-wrap items-center justify-between gap-3 px-5 py-6 text-sm text-[var(--text-dim)]">
           <span>Built by D L Narayana</span>
           <span className="mono text-xs">Next.js · API Routes · Recharts · Motion</span>
@@ -325,7 +325,7 @@ export default function Home() {
 
 function StatCard({ icon: Icon, label, value, color }: { icon: React.ElementType; label: string; value: string | number; color: string }) {
   return (
-    <div className="rounded-2xl border border-[var(--border)] bg-white p-4">
+    <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
       <span className="grid h-9 w-9 place-items-center rounded-lg" style={{ background: `${color}1a`, color }}>
         <Icon size={18} weight="fill" />
       </span>
@@ -350,7 +350,7 @@ function Select({
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="rounded-xl border border-[var(--border)] bg-white px-3 py-2 text-sm outline-none focus:border-[var(--brand)]"
+      className="rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm outline-none focus:border-[var(--brand)]"
     >
       <option value="">{placeholder}</option>
       {options.map(([v, l]) => (
@@ -377,7 +377,7 @@ function ReportCard({
   return (
     <motion.div
       layout
-      className="flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-white"
+      className="flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)]"
     >
       {!compact && report.photo && (
         <Link href={`/report/${report.id}`} className="block">
