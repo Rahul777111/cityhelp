@@ -16,7 +16,21 @@ export type Report = {
   // real-world coordinates for the Leaflet map
   lat: number;
   lng: number;
+  photo?: string | null;
+  department?: string | null;
+  reporter?: string | null;
   timeline: { label: string; at: number }[];
+};
+
+export const DEPARTMENTS: Record<string, string> = {
+  pothole: "Roads & Transport",
+  streetlight: "Street Lighting",
+  garbage: "Sanitation",
+  water: "Water Board (HMWSSB)",
+  drainage: "Storm Water & Drainage",
+  electricity: "Electricity (TSSPDCL)",
+  traffic: "Traffic Police",
+  park: "Parks & Urban Greening",
 };
 
 // Real Hyderabad coordinates per area

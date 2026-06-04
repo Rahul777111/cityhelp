@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import {
   MagnifyingGlass,
@@ -376,15 +377,22 @@ function ReportCard({
   return (
     <motion.div
       layout
-      className="flex flex-col rounded-2xl border border-[var(--border)] bg-white p-4"
+      className="flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-white"
     >
+      {!compact && report.photo && (
+        <Link href={`/report/${report.id}`} className="block">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={report.photo} alt={report.title} className="h-40 w-full object-cover" />
+        </Link>
+      )}
+      <div className="flex flex-col p-4">
       <div className="flex items-start gap-3">
         <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[var(--brand-soft)] text-[var(--brand-dark)]">
           <CategoryIcon category={report.category} size={18} />
         </span>
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-2">
-            <h3 className="font-semibold leading-snug">{report.title}</h3>
+            <Link href={`/report/${report.id}`} className="font-semibold leading-snug hover:text-[var(--brand)]">{report.title}</Link>
             <StatusBadge status={report.status} />
           </div>
           <div className="mt-0.5 flex flex-wrap items-center gap-x-2 text-xs text-[var(--text-dim)]">
@@ -414,12 +422,16 @@ function ReportCard({
         >
           <ArrowFatUp size={15} weight={voted ? "fill" : "regular"} /> {report.upvotes}
         </button>
-        <span
-          className="rounded-md px-2 py-0.5 text-xs font-medium capitalize"
-          style={{
-            color: report.priority === "high" ? "var(--danger)" : "var(--text-dim)",
-          }}
-        >
+        <Link href={`/report/${report.id}`} className="text-xs font-medium text-[var(--brand)] hover:underline">
+          View details
+        </Link>
+      </div>
+      <span
+        className="sr-only"
+        style={{
+          color: report.priority === "high" ? "var(--danger)" : "var(--text-dim)",
+        }}
+      >
           {report.priority} priority
         </span>
       </div>

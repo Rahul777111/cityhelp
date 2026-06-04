@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getStore } from "@/lib/store";
 import { supabase, hasSupabase } from "@/lib/supabase";
-import { AREA_COORDS, type Report, type Status } from "@/lib/data";
+import { AREA_COORDS, DEPARTMENTS, type Report, type Status } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +19,9 @@ type Row = {
   timeline: { label: string; at?: number }[];
   lat: number | null;
   lng: number | null;
+  photo: string | null;
+  department: string | null;
+  reporter: string | null;
   created_at: string;
 };
 
@@ -36,6 +39,9 @@ function rowToReport(r: Row): Report {
     y: r.y,
     lat: r.lat ?? 17.44,
     lng: r.lng ?? 78.43,
+    photo: r.photo ?? null,
+    department: r.department ?? null,
+    reporter: r.reporter ?? "Resident",
     timeline: (r.timeline || []).map((t) => ({
       label: t.label,
       at: t.at ?? new Date(r.created_at).getTime(),
@@ -123,6 +129,9 @@ export async function POST(req: Request) {
     y: typeof body.y === "number" ? body.y : Math.round(Math.random() * 70 + 12),
     lat: coords.lat + jitter(),
     lng: coords.lng + jitter(),
+    photo: `/issues/${body.category}.jpg`,
+    department: DEPARTMENTS[body.category] || "General",
+    reporter: (body.reporter as string) || "Resident",
     timeline: [{ label: "Reported", at: Date.now() }],
   };
 
