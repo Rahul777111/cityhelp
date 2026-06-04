@@ -10,11 +10,28 @@ export type Report = {
   priority: "low" | "medium" | "high";
   upvotes: number;
   createdAt: number;
-  // normalized 0-100 coords for the city map
+  // normalized 0-100 coords for the fallback grid map
   x: number;
   y: number;
+  // real-world coordinates for the Leaflet map
+  lat: number;
+  lng: number;
   timeline: { label: string; at: number }[];
 };
+
+// Real Hyderabad coordinates per area
+export const AREA_COORDS: Record<string, { lat: number; lng: number }> = {
+  "Banjara Hills": { lat: 17.4126, lng: 78.448 },
+  Gachibowli: { lat: 17.4401, lng: 78.3489 },
+  Madhapur: { lat: 17.4483, lng: 78.3915 },
+  Kukatpally: { lat: 17.4948, lng: 78.3996 },
+  Secunderabad: { lat: 17.4399, lng: 78.4983 },
+  "Jubilee Hills": { lat: 17.4313, lng: 78.407 },
+  Begumpet: { lat: 17.444, lng: 78.4616 },
+  Ameerpet: { lat: 17.4374, lng: 78.4487 },
+};
+
+export const CITY_CENTER = { lat: 17.44, lng: 78.43 };
 
 export const CATEGORIES = [
   { id: "pothole", label: "Pothole", icon: "Road" },
@@ -76,6 +93,8 @@ export const SEED_REPORTS: Report[] = [
     createdAt: now - day * 4,
     x: 28,
     y: 34,
+    lat: 17.4126,
+    lng: 78.448,
     timeline: [
       { label: "Reported", at: now - day * 4 },
       { label: "Acknowledged by GHMC", at: now - day * 3 },
@@ -94,6 +113,8 @@ export const SEED_REPORTS: Report[] = [
     createdAt: now - day * 2,
     x: 62,
     y: 58,
+    lat: 17.4401,
+    lng: 78.3489,
     timeline: [{ label: "Reported", at: now - day * 2 }],
   },
   {
@@ -108,6 +129,8 @@ export const SEED_REPORTS: Report[] = [
     createdAt: now - day * 8,
     x: 54,
     y: 41,
+    lat: 17.4483,
+    lng: 78.3915,
     timeline: [
       { label: "Reported", at: now - day * 8 },
       { label: "Sanitation team notified", at: now - day * 7 },
@@ -126,6 +149,8 @@ export const SEED_REPORTS: Report[] = [
     createdAt: now - day * 1,
     x: 40,
     y: 18,
+    lat: 17.4948,
+    lng: 78.3996,
     timeline: [
       { label: "Reported", at: now - day * 1 },
       { label: "Water board acknowledged", at: now - day * 0.6 },
@@ -143,6 +168,8 @@ export const SEED_REPORTS: Report[] = [
     createdAt: now - day * 3,
     x: 73,
     y: 28,
+    lat: 17.4399,
+    lng: 78.4983,
     timeline: [{ label: "Reported", at: now - day * 3 }],
   },
   {
@@ -157,6 +184,8 @@ export const SEED_REPORTS: Report[] = [
     createdAt: now - day * 5,
     x: 20,
     y: 52,
+    lat: 17.4313,
+    lng: 78.407,
     timeline: [
       { label: "Reported", at: now - day * 5 },
       { label: "TSSPDCL inspecting transformer", at: now - day * 2 },
@@ -174,6 +203,8 @@ export const SEED_REPORTS: Report[] = [
     createdAt: now - day * 10,
     x: 66,
     y: 72,
+    lat: 17.444,
+    lng: 78.4616,
     timeline: [
       { label: "Reported", at: now - day * 10 },
       { label: "Traffic police on site", at: now - day * 9 },
@@ -192,6 +223,8 @@ export const SEED_REPORTS: Report[] = [
     createdAt: now - day * 1.5,
     x: 46,
     y: 64,
+    lat: 17.4374,
+    lng: 78.4487,
     timeline: [{ label: "Reported", at: now - day * 1.5 }],
   },
 ];

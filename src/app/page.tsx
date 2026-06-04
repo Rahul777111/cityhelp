@@ -22,11 +22,20 @@ import {
   YAxis,
   Tooltip,
 } from "recharts";
+import dynamic from "next/dynamic";
 import Navbar from "./components/Navbar";
-import CityMap from "./components/CityMap";
 import ReportForm from "./components/ReportForm";
+import { useReportsRealtime } from "@/lib/useRealtime";
 import { CategoryIcon, StatusBadge, timeAgo, STATUS_META } from "./components/shared";
 import { CATEGORIES, AREAS, SERVICES, type Report, type Status } from "@/lib/data";
+
+// Leaflet must be client-only (no SSR)
+const LeafletMap = dynamic(() => import("./components/LeafletMap"), {
+  ssr: false,
+  loading: () => (
+    <div className="aspect-[16/11] w-full animate-pulse rounded-2xl bg-[var(--muted)]" />
+  ),
+});
 
 type Stats = {
   total: number;
@@ -70,6 +79,9 @@ export default function Home() {
   useEffect(() => {
     load();
   }, [load]);
+
+  // live updates: when any report is inserted/updated/upvoted, refresh
+  useReportsRealtime(() => load());
 
   const upvote = async (id: string) => {
     if (voted.has(id)) return;
@@ -235,11 +247,17 @@ export default function Home() {
 
           {tab === "Map" && (
             <motion.div key="map" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="grid gap-5 lg:grid-cols-[1.5fr_1fr]">
-              <CityMap reports={reports} activeId={activeId} onSelect={setActiveId} />
+              <LeafletMap reports={reports} activeId={activeId} onSelect={setActiveId} />
               <div className="flex flex-col gap-2">
-                <h3 className="text-sm font-semibold text-[var(--text-dim)]">
-                  {activeId ? "Selected report" : "Tap a pin to view a report"}
-                </h3>
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm font-semibold text-[var(--text-dim)]">
+                    {activeId ? "Selected report" : "Tap a pin to view a report"}
+                  </h3>
+                  <span className="flex items-center gap-1.5 text-xs text-[var(--resolved)]">
+                    <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--resolved)] opacity-60" /><span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--resolved)]" /></span>
+                    Live
+                  </span>
+                </div>
                 {(activeId ? reports.filter((r) => r.id === activeId) : reports.slice(0, 4)).map((r) => (
                   <ReportCard key={r.id} report={r} onUpvote={upvote} voted={voted.has(r.id)} compact />
                 ))}
