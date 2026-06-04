@@ -8,6 +8,11 @@ A full-stack civic platform for a city (modeled on Hyderabad). Residents report 
 
 ## Features
 
+- **Accounts and guest mode** — real email and password sign up and log in via Supabase Auth, a resident profile created automatically, a profile menu, and a Continue as guest option to report and browse without an account.
+- **Theme options** — light, dark, and system themes plus five accent colors (Teal, Indigo, Rose, Amber, Emerald), applied instantly across the app and remembered, with no flash on load.
+- **Built-in assistant** — Civi, a self-contained guide with about 1,200 question and answer pairs and no external API. As you type, it suggests matching questions; tap one for a preloaded answer covering reporting, tracking, departments, the map, analytics, accounts, and themes.
+- **Current-time stamping** — every report and comment is recorded with the live current time, timelines show when each step happened, and the feed shows relative times like "4h ago".
+
 - **Report an issue** — categorized reports (potholes, streetlights, water, drainage, power, traffic, garbage, parks) with area, priority, description, and an auto-attached issue photo, submitted through a serverless API and persisted to Supabase.
 - **Report detail pages** — every report has its own page with a status progress tracker (open to in progress to resolved), a full event timeline, the routed city department, and a comment thread where residents and officials respond.
 - **Comment threads** — leave updates on any report; official responses are flagged. Comments persist to Supabase with realtime sync.
@@ -21,7 +26,7 @@ A full-stack civic platform for a city (modeled on Hyderabad). Residents report 
 
 ## Tech stack
 
-Next.js 16 (App Router) · TypeScript · Tailwind CSS · Supabase (Postgres + Realtime) · API Routes · Leaflet / React-Leaflet · Recharts · Motion · Phosphor Icons
+Next.js 16 (App Router) · TypeScript · Tailwind CSS · Supabase (Postgres + Auth + Realtime) · API Routes · Leaflet / React-Leaflet · Recharts · Motion · Phosphor Icons
 
 ## Getting started
 
