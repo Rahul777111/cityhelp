@@ -98,7 +98,7 @@ export default function LeafletMap({
     <div
       ref={containerRef}
       className="aspect-[16/11] w-full overflow-hidden rounded-2xl border border-[var(--border)]"
-      style={{ background: "#e8f0ee" }}
+      style={{ background: "#e8f0ee", isolation: "isolate", zIndex: 0 }}
     />
   );
 }
