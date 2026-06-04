@@ -22,6 +22,7 @@ import {
   ChartLineUp,
 } from "@phosphor-icons/react";
 import Navbar from "../components/Navbar";
+import { useTheme } from "@/lib/theme";
 
 type Analytics = {
   total: number;
@@ -38,6 +39,11 @@ type Analytics = {
 
 export default function AnalyticsPage() {
   const [a, setA] = useState<Analytics | null>(null);
+  const { resolved } = useTheme();
+  const dark = resolved === "dark";
+  const axisColor = dark ? "#93a7b2" : "#5b7081";
+  const labelColor = dark ? "#eaf2f5" : "#0f2231";
+  const gridColor = dark ? "#233138" : "#eef3f6";
 
   useEffect(() => {
     fetch("/api/analytics")
@@ -98,10 +104,10 @@ export default function AnalyticsPage() {
                         <stop offset="100%" stopColor="#0d9488" stopOpacity={0} />
                       </linearGradient>
                     </defs>
-                    <CartesianGrid stroke="#eef3f6" vertical={false} />
-                    <XAxis dataKey="label" tick={{ fontSize: 11, fill: "#5b7081" }} axisLine={false} tickLine={false} />
-                    <YAxis tick={{ fontSize: 11, fill: "#5b7081" }} axisLine={false} tickLine={false} allowDecimals={false} />
-                    <Tooltip contentStyle={{ borderRadius: 10, border: "1px solid #e1e8ee", fontSize: 12 }} />
+                    <CartesianGrid stroke={gridColor} vertical={false} />
+                    <XAxis dataKey="label" tick={{ fontSize: 11, fill: axisColor }} axisLine={false} tickLine={false} />
+                    <YAxis tick={{ fontSize: 11, fill: axisColor }} axisLine={false} tickLine={false} allowDecimals={false} />
+                    <Tooltip contentStyle={{ borderRadius: 10, border: `1px solid ${gridColor}`, fontSize: 12, background: dark ? "#131e24" : "#fff", color: labelColor }} />
                     <Area type="monotone" dataKey="reports" stroke="#0d9488" strokeWidth={2} fill="url(#g)" />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -118,8 +124,8 @@ export default function AnalyticsPage() {
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={a.categoryData} layout="vertical" margin={{ left: 28, right: 12 }}>
                       <XAxis type="number" hide allowDecimals={false} />
-                      <YAxis type="category" dataKey="name" tick={{ fontSize: 12, fill: "#0f2231" }} axisLine={false} tickLine={false} width={92} />
-                      <Tooltip contentStyle={{ borderRadius: 10, border: "1px solid #e1e8ee", fontSize: 12 }} cursor={{ fill: "rgba(13,148,136,0.08)" }} />
+                      <YAxis type="category" dataKey="name" tick={{ fontSize: 12, fill: labelColor }} axisLine={false} tickLine={false} width={92} />
+                      <Tooltip contentStyle={{ borderRadius: 10, border: `1px solid ${gridColor}`, fontSize: 12, background: dark ? "#131e24" : "#fff", color: labelColor }} cursor={{ fill: "rgba(13,148,136,0.08)" }} />
                       <Bar dataKey="value" fill="#0d9488" radius={[0, 6, 6, 0]} maxBarSize={22} />
                     </BarChart>
                   </ResponsiveContainer>

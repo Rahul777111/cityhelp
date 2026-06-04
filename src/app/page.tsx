@@ -29,6 +29,7 @@ import ReportForm from "./components/ReportForm";
 import { AreasStrip, ImpactWall } from "./components/DiscoverSections";
 import LandingHero from "./components/LandingHero";
 import { useReportsRealtime } from "@/lib/useRealtime";
+import { useTheme } from "@/lib/theme";
 import { CategoryIcon, StatusBadge, timeAgo, STATUS_META } from "./components/shared";
 import { CATEGORIES, AREAS, SERVICES, type Report, type Status } from "@/lib/data";
 
@@ -63,6 +64,9 @@ export default function Home() {
   const [sort, setSort] = useState("recent");
   const [activeId, setActiveId] = useState<string | null>(null);
   const [voted, setVoted] = useState<Set<string>>(new Set());
+  const { resolved } = useTheme();
+  const chartDark = resolved === "dark";
+  const chartAxis = chartDark ? "#93a7b2" : "#5b7081";
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -184,9 +188,9 @@ export default function Home() {
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={catData} margin={{ top: 4, right: 4, left: -24, bottom: 0 }}>
                     <XAxis dataKey="name" tick={false} axisLine={false} />
-                    <YAxis tick={{ fontSize: 10, fill: "#5b7081" }} axisLine={false} tickLine={false} allowDecimals={false} />
+                    <YAxis tick={{ fontSize: 10, fill: chartAxis }} axisLine={false} tickLine={false} allowDecimals={false} />
                     <Tooltip
-                      contentStyle={{ borderRadius: 10, border: "1px solid #e1e8ee", fontSize: 12 }}
+                      contentStyle={{ borderRadius: 10, border: `1px solid ${chartDark ? "#233138" : "#e1e8ee"}`, fontSize: 12, background: chartDark ? "#131e24" : "#fff", color: chartDark ? "#eaf2f5" : "#0f2231" }}
                       cursor={{ fill: "rgba(13,148,136,0.08)" }}
                     />
                     <Bar dataKey="value" fill="var(--brand)" radius={[4, 4, 0, 0]} maxBarSize={26} />
